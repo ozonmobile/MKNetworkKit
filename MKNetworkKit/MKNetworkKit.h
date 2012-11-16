@@ -33,6 +33,20 @@
 #if TARGET_OS_IPHONE
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
+@interface NSDictionary(sdfsubscripts)
+- (id)objectForKeyedSubscript:(id)key;
+@end
+@interface NSMutableDictionary(sdfsubscripts)
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
+@end
+@interface NSArray(sdfsubscripts)
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+@end
+@interface NSMutableArray(sdfsubscripts)
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
+@end
+#endif
 #elif TARGET_OS_MAC
 #import <Cocoa/Cocoa.h>
 #import <AppKit/AppKit.h>
