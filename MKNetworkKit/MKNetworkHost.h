@@ -23,11 +23,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-
 #import "MKNetworkRequest.h"
-
 #import "NSString+MKNKAdditions.h"
+#import "Reachability.h"
 
 @class MKNetworkHost;
 
@@ -52,7 +50,7 @@
  *  Network reachability notifications are automatically taken care of by MKNetworkEngine
  *
  */
-- (id) initWithHostName:(NSString*) hostName;
+- (id) initWithHostName:(NSString*) hostName NS_DESIGNATED_INITIALIZER;
 
 -(void) enableCache;
 -(void) enableCacheWithDirectory:(NSString*) cacheDirectoryPath inMemoryCost:(NSUInteger) inMemoryCost;
@@ -63,6 +61,8 @@
 @property NSDictionary *defaultHeaders;
 @property BOOL secureHost;
 @property MKNKParameterEncoding defaultParameterEncoding;
+
+@property(nonatomic,strong,readonly)Reachability *reachability;
 
 @property (weak) id <MKNetworkHostDelegate> delegate;
 @property (copy) void (^backgroundSessionCompletionHandler)(void);
