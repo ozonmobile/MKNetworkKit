@@ -152,7 +152,10 @@ NSUInteger const kMKCacheDefaultCost = 10;
 }
 
 -(id <NSCoding>) objectForKeyedSubscript:(id <NSCopying>) key {
-  
+  if (!key) {
+    return nil;
+  }
+
   NSData *cachedData = self.inMemoryCache[key];
   if(cachedData) return cachedData;
   
@@ -174,7 +177,10 @@ NSUInteger const kMKCacheDefaultCost = 10;
 - (void)setObject:(id <NSCoding>) obj forKeyedSubscript:(id <NSCopying>) key {
   
   dispatch_async(self.queue, ^{
-    
+    if (!key) {
+        return;
+    }
+
     self.inMemoryCache[key] = obj;
     
     // inserts the recently added item's key into the top of the queue.
