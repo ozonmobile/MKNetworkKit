@@ -78,6 +78,10 @@ typedef enum {
 @property BOOL ignoreCache;
 @property BOOL alwaysLoad;
 
+@property NSMutableDictionary *parameters;
+@property NSMutableDictionary *headers;
+@property NSMutableArray *completionHandlers;
+
 @property NSString *httpMethod;
 
 @property (readonly) BOOL isCachedResponse;

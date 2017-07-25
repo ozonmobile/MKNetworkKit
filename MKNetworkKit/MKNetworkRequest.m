@@ -44,13 +44,9 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
 @property (readwrite) NSURLSessionTask *task;
 @property (readwrite) CGFloat progress;
 
-@property NSMutableDictionary *parameters;
-@property NSMutableDictionary *headers;
-
 @property NSMutableArray *attachedFiles;
 @property NSMutableArray *attachedData;
 
-@property NSMutableArray *completionHandlers;
 @property NSMutableArray *uploadProgressChangedHandlers;
 @property NSMutableArray *downloadProgressChangedHandlers;
 @end
