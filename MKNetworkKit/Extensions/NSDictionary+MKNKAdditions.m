@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "NSString+MKNKAdditions.h"
+#import "MKNetworkConstants.h"
 
 @implementation NSDictionary (MKNKAdditions)
 // Do not use this method for any other purpose.
@@ -60,15 +61,25 @@
 
 
 -(NSString*) jsonEncodedKeyValueString {
-  
-  NSError *error = nil;
-  NSData *data = [NSJSONSerialization dataWithJSONObject:self
-                                                 options:0 // non-pretty printing
-                                                   error:&error];
-  if(error)
-    NSLog(@"JSON Parsing Error: %@", error);
-  
-  return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSData *data;
+    
+    NSArray *rootArray = self[MKNKJSONArrayRootObjectConstant];
+    if (rootArray) {
+        data = [NSJSONSerialization dataWithJSONObject:rootArray
+                                               options:0 // non-pretty printing
+                                                 error:&error];
+    }
+    else {
+        data = [NSJSONSerialization dataWithJSONObject:self
+                                               options:0 // non-pretty printing
+                                                 error:&error];
+    }
+    
+    if(error)
+        NSLog(@"JSON Parsing Error: %@", error);
+    
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 
